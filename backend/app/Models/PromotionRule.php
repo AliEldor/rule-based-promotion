@@ -37,4 +37,12 @@ class PromotionRule extends Model
     }
 
     
+    //   Scope a query to only include active rules
+    public function scopeActive(Builder $query): Builder
+    {
+        return $query->where('is_active', true);
+    }
+
+
+    
 }
