@@ -79,5 +79,33 @@ class RuleEvaluationService
         ];
     }
 
-    
+    private static function extractEmailDomain(string $email): string
+    {
+        return str_contains($email, '@') ? substr($email, strpos($email, '@') + 1) : '';
+    }
+
+    private static function logRuleApplication(int $ruleId, array $lineItem, array $customer, float $discount, ?string $orderReference): void
+    {
+        RuleApplication::create([
+            'rule_id' => $ruleId,
+            'customer_id' => $customer['id'] ?? null,
+            'order_reference' => $orderReference ?? 'EVAL_' . Str::upper(Str::random(8)),
+            'line_item_data' => $lineItem,
+            'customer_data' => $customer,
+            'discount_amount' => $discount
+        ]);
+    }
+
+    private static function formatResponse(array $appliedRules, array $lineItem, float $totalDiscount): array
+    {
+        $originalTotal = $lineItem['quantity'] * $lineItem['unitPrice'];
+        $finalLineTotal = max(0, $originalTotal - $totalDiscount);
+
+        return [
+            'applied' => $appliedRules,
+            'totalDiscount' => round($totalDiscount, 2),
+            'finalLineTotal' => round($finalLineTotal, 2),
+            'originalLineTotal' => round($originalTotal, 2)
+        ];
+    }
 }
