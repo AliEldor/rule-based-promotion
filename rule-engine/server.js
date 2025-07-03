@@ -107,3 +107,24 @@ function findApplicableTier(quantity, tiers) {
 }
 
 
+// err handling middleware
+app.use((error, req, res, next) => {
+    console.error('Unhandled error:', error);
+    res.status(500).json({
+        error: 'Internal server error',
+        details: error.message
+    });
+});
+
+app.use('*', (req, res) => {
+    res.status(404).json({
+        error: 'Endpoint not found',
+        path: req.originalUrl
+    });
+});
+
+app.listen(PORT, () => {
+    console.log("server is running on port", PORT);
+});
+
+module.exports = app;
