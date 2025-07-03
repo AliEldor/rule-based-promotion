@@ -1,0 +1,71 @@
+<?php
+
+namespace App\Services;
+
+use App\Models\PromotionRule;
+use Exception;
+
+class RuleService
+{
+    public static function createRule(array $ruleData): PromotionRule
+    {
+        return PromotionRule::create($ruleData);
+    }
+
+    public static function updateRule(int $id, array $ruleData): PromotionRule
+    {
+        $rule = PromotionRule::find($id);
+        
+        if (!$rule) {
+            throw new Exception('Rule not found');
+        }
+
+        $rule->update($ruleData);
+        return $rule->fresh();
+    }
+
+    public static function deleteRule(int $id): array
+    {
+        $rule = PromotionRule::find($id);
+        
+        if (!$rule) {
+            throw new Exception('Rule not found');
+        }
+
+        $rule->delete();
+        return ['message' => 'Successfully deleted'];
+    }
+
+    public static function getSingleRule(int $id): PromotionRule
+    {
+        $rule = PromotionRule::find($id);
+        
+        if (!$rule) {
+            throw new Exception('Rule not found');
+        }
+
+        return $rule;
+    }
+
+    public static function getAllRules(int $page = 0): array
+    {
+        $rules = PromotionRule::skip($page * 10)
+            ->limit(10)
+            ->get();
+
+        return [
+            'count' => $rules->count(),
+            'data' => $rules,
+        ];
+    }
+
+    public static function getActiveRules(): array
+    {
+        $rules = PromotionRule::active()
+            ->validAt()
+            ->orderBySalience()
+            ->get();
+
+        return $rules->toArray();
+    }
+}
