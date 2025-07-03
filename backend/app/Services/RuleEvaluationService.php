@@ -57,5 +57,27 @@ class RuleEvaluationService
         return self::formatResponse($appliedRules, $lineItem, $totalDiscount);
     }
 
+    private static function prepareFacts(array $lineItem, array $customer): array
+    {
+        return [
+            'line' => [
+                'productId' => $lineItem['productId'],
+                'quantity' => $lineItem['quantity'],
+                'unitPrice' => $lineItem['unitPrice'],
+                'categoryId' => $lineItem['categoryId'] ?? null,
+                'total' => $lineItem['quantity'] * $lineItem['unitPrice']
+            ],
+            'customer' => [
+                'id' => $customer['id'] ?? null,
+                'email' => $customer['email'] ?? '',
+                'type' => $customer['type'] ?? 'retail',
+                'loyaltyTier' => $customer['loyaltyTier'] ?? 'none',
+                'ordersCount' => $customer['ordersCount'] ?? 0,
+                'city' => $customer['city'] ?? '',
+                'emailDomain' => self::extractEmailDomain($customer['email'] ?? '')
+            ]
+        ];
+    }
+
     
 }
