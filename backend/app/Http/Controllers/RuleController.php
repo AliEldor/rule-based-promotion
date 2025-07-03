@@ -46,5 +46,29 @@ class RuleController extends Controller
         }
     }
 
-    
+    public function update(UpdateRuleRequest $request, $id)
+    {
+        try {
+            if (!$id) {
+                return $this->errorResponse("Rule ID not provided", 400);
+            }
+            $rule = RuleService::updateRule($id, $request->validated());
+            return $this->successResponse($rule, "Rule updated successfully", 200);
+        } catch (\Exception $e) {
+            return $this->errorResponse("Failed to update rule: " . $e->getMessage(), 500);
+        }
+    }
+
+    public function destroy($id)
+    {
+        try {
+            if (!$id) {
+                return $this->errorResponse("Rule ID not provided", 400);
+            }
+            $result = RuleService::deleteRule($id);
+            return $this->successResponse($result, "Rule deleted successfully", 200);
+        } catch (\Exception $e) {
+            return $this->errorResponse("Failed to delete rule: " . $e->getMessage(), 500);
+        }
+    }
 }
