@@ -23,5 +23,28 @@ class RuleController extends Controller
         }
     }
 
+    public function store(CreateRuleRequest $request)
+    {
+        try {
+            $rule = RuleService::createRule($request->validated());
+            return $this->successResponse($rule, "Rule created successfully", 201);
+        } catch (\Exception $e) {
+            return $this->errorResponse("Failed to create rule: " . $e->getMessage(), 500);
+        }
+    }
+
+    public function show($id)
+    {
+        try {
+            if (!$id) {
+                return $this->errorResponse("Rule ID not provided", 400);
+            }
+            $rule = RuleService::getSingleRule($id);
+            return $this->successResponse($rule, "Rule fetched successfully", 200);
+        } catch (\Exception $e) {
+            return $this->errorResponse("Failed to fetch rule: " . $e->getMessage(), 500);
+        }
+    }
+
     
 }
