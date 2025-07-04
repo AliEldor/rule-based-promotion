@@ -294,7 +294,6 @@ GET    /api/v1/customers       - List customers
 
 ## Security Features
 
-- **Laravel Sanctum** - API authentication with tokens
 - **Input Validation** - Comprehensive request validation
 - **CORS Configuration** - Controlled cross-origin requests
 - **Rate Limiting** - API endpoint protection
