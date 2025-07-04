@@ -17,13 +17,15 @@ class CustomerController extends Controller
 
             // Transform the data to match frontend expectations
             $transformedCustomers = $customers->map(function ($customer) {
+                $name = $this->generateRealisticName($customer);
+
                 return [
                     'id' => $customer->id,
-                    'name' => ucfirst($customer->type) . ' Customer #' . $customer->id,
+                    'name' => $name,
                     'email' => $customer->email,
                     'type' => $customer->type,
-                    'loyaltyTier' => $customer->loyalty_tier,
-                    'ordersCount' => $customer->orders_count,
+                    'loyalty_tier' => $customer->loyalty_tier,
+                    'orders_count' => $customer->orders_count,
                     'city' => $customer->city,
                 ];
             });
@@ -41,6 +43,41 @@ class CustomerController extends Controller
             return $this->successResponse($customer, 'Customer fetched successfully');
         } catch (\Exception $e) {
             return $this->errorResponse('Customer not found', 404);
+        }
+    }
+
+    private function generateRealisticName($customer)
+    {
+        $restaurantNames = [
+            'Green Garden Restaurant',
+            'The Golden Spoon',
+            'Sunset Bistro',
+            'Royal Palace Dining',
+            'Fresh Market Cafe'
+        ];
+
+        $retailNames = [
+            'TechCorp Solutions',
+            'Modern Retail Co.',
+            'Prime Business Group',
+            'Elite Commerce Ltd.',
+            'Global Trade Partners'
+        ];
+
+        if ($customer->type === 'restaurants') {
+            if (strpos($customer->email, 'apple') !== false) {
+                return 'Apple Tree Restaurant';
+            } elseif (strpos($customer->email, 'diner') !== false) {
+                return 'Carol\'s Diner';
+            } else {
+                return $restaurantNames[($customer->id - 1) % count($restaurantNames)];
+            }
+        } else {
+            if (strpos($customer->email, 'techcorp') !== false) {
+                return 'TechCorp Solutions';
+            } else {
+                return $retailNames[($customer->id - 1) % count($retailNames)];
+            }
         }
     }
 }
