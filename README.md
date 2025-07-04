@@ -383,4 +383,3 @@ npm run test
   <br>
   <em>Modern microservices architecture for scalable e-commerce promotions</em>
 </div>
-
