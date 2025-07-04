@@ -305,7 +305,7 @@ GET    /api/v1/customers       - List customers
 - **Service Layer Architecture** for business logic separation
 - **Eloquent ORM** for database interactions
 - **API Resources** for consistent JSON responses
-- **Custom Middleware** for authentication and validation
+- **Custom Middleware** for validation
 - **Artisan Commands** for maintenance tasks
 
 ### React Frontend
@@ -362,10 +362,6 @@ GET    /api/v1/customers       - List customers
 cd backend
 php artisan test
 
-# Frontend tests
-cd frontend
-npm run test
-```
 
 ### Unit Tests
 
