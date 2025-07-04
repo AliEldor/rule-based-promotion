@@ -362,6 +362,10 @@ GET    /api/v1/customers       - List customers
 cd backend
 php artisan test
 
+# Frontend tests
+cd frontend
+npm run test
+```
 
 ### Unit Tests
 
