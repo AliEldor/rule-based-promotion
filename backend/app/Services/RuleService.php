@@ -15,7 +15,7 @@ class RuleService
     public static function updateRule(int $id, array $ruleData): PromotionRule
     {
         $rule = PromotionRule::find($id);
-        
+
         if (!$rule) {
             throw new Exception('Rule not found');
         }
@@ -27,7 +27,7 @@ class RuleService
     public static function deleteRule(int $id): array
     {
         $rule = PromotionRule::find($id);
-        
+
         if (!$rule) {
             throw new Exception('Rule not found');
         }
@@ -39,7 +39,7 @@ class RuleService
     public static function getSingleRule(int $id): PromotionRule
     {
         $rule = PromotionRule::find($id);
-        
+
         if (!$rule) {
             throw new Exception('Rule not found');
         }
@@ -66,6 +66,21 @@ class RuleService
             ->orderBySalience()
             ->get();
 
-        return $rules->toArray();
+        return $rules->map(function ($rule) {
+            return [
+                'id' => $rule->id,
+                'name' => $rule->name,
+                'description' => $rule->description,
+                'salience' => $rule->salience,
+                'stackable' => $rule->stackable,
+                'is_active' => $rule->is_active,
+                'conditions' => $rule->conditions, 
+                'actions' => $rule->actions,       
+                'valid_from' => $rule->valid_from,
+                'valid_until' => $rule->valid_until,
+                'created_at' => $rule->created_at,
+                'updated_at' => $rule->updated_at,
+            ];
+        })->toArray();
     }
 }
