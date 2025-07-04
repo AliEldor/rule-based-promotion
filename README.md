@@ -37,25 +37,105 @@
 - CORS enabled
 - Microservice architecture
 
+## Rule Engine Library Justification
+
+### Why json-rules-engine?
+
+**json-rules-engine** was selected as the core rule evaluation library for the following reasons:
+
+1. **JSON-Based Rule Definition**
+
+   - Rules are defined in pure JSON format, making them database-friendly and easily serializable
+   - Non-technical users can potentially create rules through a UI that generates JSON
+   - Rules can be stored, versioned, and modified without code changes
+
+2. **Flexible Condition Logic**
+
+   - Supports complex boolean logic with AND, OR, and nested conditions
+   - Built-in operators for common comparisons (equals, greater than, contains, etc.)
+   - Custom operators can be defined for domain-specific logic
+
+3. **Event-Driven Architecture**
+
+   - Emits events when rules are triggered, allowing for loose coupling
+   - Easy to integrate with logging, analytics, and notification systems
+   - Supports multiple actions per rule with conditional execution
+
+4. **Performance & Scalability**
+
+   - Lightweight library with minimal dependencies
+   - Efficient rule evaluation with short-circuit logic
+   - Stateless design perfect for microservices architecture
+
+5. **Extensibility**
+
+   - Custom facts can be defined for any data structure
+   - Operators can be extended for specific business logic
+   - Easy integration with external APIs and data sources
+
+6. **Developer Experience**
+   - Well-documented with comprehensive examples
+   - Active community support and regular updates
+   - TypeScript support for better development experience
+
+### Alternative Considerations
+
+- **Drools (Java)**: Too heavy for our Node.js microservice approach
+- **Business Rules Engine (Python)**: Limited JSON serialization support
+- **Custom Implementation**: Would require significant development time and testing
+
+The json-rules-engine library perfectly balances simplicity, flexibility, and performance for our e-commerce promotion use case.
+
 ## System Architecture
 
-<td><img src="./readme/architecture-diagram.svg" width="400" height="250"></td>
+<div align="center">
+  <img src="./readme/architecture-diagram.svg" width="800" height="500">
+  <br>
+  <em>Microservices architecture with React frontend, Laravel API, and Node.js rule engine</em>
+</div>
 
 ## User Interface
+
+### Website Demo
+
+<div align="center">
+  <img src="./readme/website.gif" width="700" height="400">
+  <br>
+  <em>Complete website walkthrough showcasing rule-based promotion system in action</em>
+</div>
+
+### Application Screenshots
 
 <div align="center">
   <table>
     <tr>
+      <td><strong>Home Dashboard</strong></td>
       <td><strong>Rule Management</strong></td>
-      <td><strong>Checkout Process</strong></td>
     </tr>
     <tr>
-      <td><img src="./readme/rule-management.png" width="400" height="250"></td>
-      <td><img src="./readme/checkout.png" width="400" height="250"></td>
+      <td><img src="./readme/home.PNG" width="450" alt="Home Dashboard"></td>
+      <td><img src="./readme/rules.PNG" width="450" alt="Rule Management"></td>
     </tr>
     <tr>
+      <td><em>Main dashboard with product catalog and navigation</em></td>
       <td><em>Dynamic rule creation and management interface</em></td>
+    </tr>
+  </table>
+</div>
+
+<div align="center">
+  <table>
+    <tr>
+      <td><strong>Checkout Process</strong></td>
+      <td><strong>404 Error Page</strong></td>
+    </tr>
+    <tr>
+      <td><img src="./readme/checkout.PNG" width="450" alt="Checkout Process"></td>
+      <td><img src="./readme/notFound.PNG" width="450" alt="404 Error Page"></td>
+    </tr>
+    <tr>
       <td><em>Real-time discount calculation during checkout</em></td>
+      <td><em>Custom 404 error page with user-friendly navigation</em></td>
     </tr>
   </table>
 </div>
@@ -63,7 +143,7 @@
 ### Promotion Engine in Action
 
 <div align="center">
-  <img src="./readme/promotion-engine.gif" width="700" height="400">
+  <img src="./readme/checkout.gif" width="700" height="400">
   <br>
   <em>Real-time rule evaluation and discount application</em>
 </div>
@@ -73,13 +153,13 @@
 ### Rule Engine Service Architecture
 
 <div align="center">
-  <img src="./readme/rule-engine-service.jpg" width="800" height="500">
+  <img src="./readme/engine-service2.jpg" width="800" height="500">
 </div>
 
 ### Laravel API Controllers
 
 <div align="center">
-  <img src="./readme/laravel-controllers.jpg" width="800" height="500">
+  <img src="./readme/controller.jpg" width="800" height="500">
 </div>
 
 ## Architecture
@@ -87,7 +167,9 @@
 ### Services Layer
 
 <div align="center">
-  <img src="./readme/services-layer.jpg" width="800" height="500">
+  <img src="./readme/rule-engine-service.jpg" width="800" height="500">
+  <br>
+  <img src="./readme/node-service.jpg" width="800" height="500">
   <br>
   <em>Laravel services and Node.js microservice communication</em>
 </div>
@@ -95,7 +177,7 @@
 ### React Components
 
 <div align="center">
-  <img src="./readme/react-components.jpg" width="900" height="600">
+  <img src="./readme/react component.jpg" width="900" height="600">
   <br>
   <em>Component-based frontend architecture</em>
 </div>
@@ -103,7 +185,7 @@
 ### Database Schema
 
 <div align="center">
-  <img src="./readme/database-schema.jpg" width="900" height="600">
+  <img src="./readme/db2.svg" width="900" height="600">
   <br>
   <em>MySQL database schema for promotions</em>
 </div>
@@ -294,3 +376,4 @@ npm run test
   <br>
   <em>Modern microservices architecture for scalable e-commerce promotions</em>
 </div>
+```

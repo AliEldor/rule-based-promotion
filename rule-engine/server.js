@@ -9,15 +9,6 @@ const PORT = process.env.PORT || 3000;
 app.use(express.json());
 app.use(cors());
 
-// health check endpoint
-app.get("/health", (req, res) => {
-  res.json({
-    status: "healthy",
-    timestamp: new Date().toISOString(),
-    service: "rule-engine",
-  });
-});
-
 app.post("/evaluate", async (req, res) => {
   try {
     const { rule, facts } = req.body;
