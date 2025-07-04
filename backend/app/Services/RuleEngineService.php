@@ -15,24 +15,33 @@ class RuleEngineService
             throw new InvalidArgumentException('Rule must have conditions.');
         }
 
-        $engineRule = self::convertToEngineFormat($rule, $facts);
+        try {
+            $engineRule = self::convertToEngineFormat($rule, $facts);
 
-        $response = Http::timeout(10)->post(self::$engineUrl . '/evaluate', [
-            'rule' => $engineRule,
-            'facts' => $facts
-        ]);
+            $response = Http::timeout(10)->post(self::$engineUrl . '/evaluate', [
+                'rule' => $engineRule,
+                'facts' => $facts
+            ]);
 
-        if ($response->failed()) {
-            throw new \Exception('Rule engine service unavailable: ' . $response->body());
+            if ($response->failed()) {
+                throw new \Exception('Rule engine service unavailable: ' . $response->body());
+            }
+
+            $result = $response->json();
+
+            return [
+                'matched' => $result['matched'] ?? false,
+                'discount' => $result['discount'] ?? 0,
+                'metadata' => $result['metadata'] ?? []
+            ];
+        } catch (\Illuminate\Http\Client\ConnectionException $e) {
+            throw new \Exception('Failed to connect to rule engine service: ' . $e->getMessage());
+        } catch (\Illuminate\Http\Client\RequestException $e) {
+            throw new \Exception('Rule engine request failed: ' . $e->getMessage());
+        } catch (\Exception $e) {
+            // Re-throw any other exceptions with context
+            throw new \Exception('Rule evaluation failed: ' . $e->getMessage());
         }
-
-        $result = $response->json();
-
-        return [
-            'matched' => $result['matched'] ?? false,
-            'discount' => $result['discount'] ?? 0,
-            'metadata' => $result['metadata'] ?? []
-        ];
     }
 
     public static function convertToEngineFormat(array $rule, array $facts): array
@@ -53,13 +62,21 @@ class RuleEngineService
 
     public static function testEngine(): array
     {
-        $response = Http::timeout(5)->get(self::$engineUrl . '/health');
+        try {
+            $response = Http::timeout(5)->get(self::$engineUrl . '/health');
 
-        if ($response->failed()) {
-            throw new \Exception('Rule engine service is not accessible.');
+            if ($response->failed()) {
+                throw new \Exception('Rule engine service is not accessible.');
+            }
+
+            return $response->json();
+        } catch (\Illuminate\Http\Client\ConnectionException $e) {
+            throw new \Exception('Failed to connect to rule engine service: ' . $e->getMessage());
+        } catch (\Illuminate\Http\Client\RequestException $e) {
+            throw new \Exception('Rule engine health check failed: ' . $e->getMessage());
+        } catch (\Exception $e) {
+            throw new \Exception('Rule engine test failed: ' . $e->getMessage());
         }
-
-        return $response->json();
     }
 
     private static function convertConditions($conditions): array
