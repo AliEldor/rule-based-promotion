@@ -343,7 +343,6 @@ GET    /api/v1/customers       - List customers
 ## Performance Optimizations
 
 - **Database Indexing** - Optimized queries for rule evaluation
-- **Caching Layer** - Redis for frequently accessed rules
 - **Microservice Communication** - Efficient HTTP API calls
 - **Frontend Optimization** - Code splitting and lazy loading
 
