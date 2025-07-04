@@ -39,7 +39,7 @@
 
 ## System Architecture
 
-pic
+<td><img src="./readme/architecture-diagram.svg" width="400" height="250"></td>
 
 ## User Interface
 
