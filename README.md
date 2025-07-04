@@ -25,7 +25,6 @@
 **Backend:**
 
 - Laravel 11.0 (PHP 8.2+)
-- Laravel Sanctum for authentication
 - MySQL database
 - RESTful API architecture
 - Service layer pattern
