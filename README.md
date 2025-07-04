@@ -1,4 +1,8 @@
-# Rule-Based Promotion Engine
+# Rule-Base- Database Management\*\* - MySQL with optimized schema for promotions
+
+---
+
+## Tech Stackromotion Engine
 
 > A modern e-commerce promotion system built with React, Laravel, and Node.js featuring dynamic rule evaluation and real-time discount calculations.
 
@@ -36,6 +40,8 @@
 - json-rules-engine library
 - CORS enabled
 - Microservice architecture
+
+---
 
 ## Rule Engine Library Justification
 
@@ -86,6 +92,8 @@
 
 The json-rules-engine library perfectly balances simplicity, flexibility, and performance for our e-commerce promotion use case.
 
+---
+
 ## System Architecture
 
 <div align="center">
@@ -93,6 +101,8 @@ The json-rules-engine library perfectly balances simplicity, flexibility, and pe
   <br>
   <em>Microservices architecture with React frontend, Laravel API, and Node.js rule engine</em>
 </div>
+
+---
 
 ## User Interface
 
@@ -148,6 +158,8 @@ The json-rules-engine library perfectly balances simplicity, flexibility, and pe
   <em>Real-time rule evaluation and discount application</em>
 </div>
 
+---
+
 ## Code Highlights
 
 ### Rule Engine Service Architecture
@@ -161,6 +173,8 @@ The json-rules-engine library perfectly balances simplicity, flexibility, and pe
 <div align="center">
   <img src="./readme/controller.jpg" width="800" height="500">
 </div>
+
+---
 
 ## Architecture
 
@@ -189,6 +203,8 @@ The json-rules-engine library perfectly balances simplicity, flexibility, and pe
   <br>
   <em>MySQL database schema for promotions</em>
 </div>
+
+---
 
 ## Getting Started
 
@@ -255,6 +271,8 @@ The json-rules-engine library perfectly balances simplicity, flexibility, and pe
    - Laravel API: http://localhost:8000
    - Rule Engine: http://localhost:3000
 
+---
+
 ## API Endpoints
 
 ### Rule Management
@@ -282,6 +300,8 @@ GET    /api/v1/categories      - List categories
 GET    /api/v1/customers       - List customers
 ```
 
+---
+
 ## Database Schema
 
 ### Core Tables
@@ -292,12 +312,16 @@ GET    /api/v1/customers       - List customers
 - **categories** - Product categorization
 - **rule_applications** - Track applied promotions
 
+---
+
 ## Security Features
 
 - **Input Validation** - Comprehensive request validation
 - **CORS Configuration** - Controlled cross-origin requests
 - **Rate Limiting** - API endpoint protection
 - **SQL Injection Prevention** - Eloquent ORM protection
+
+---
 
 ## Key Features Demonstrated
 
@@ -324,6 +348,8 @@ GET    /api/v1/customers       - List customers
 - **Microservice Architecture** for scalability
 - **Real-time Processing** with optimized performance
 
+---
+
 ## Rule Engine Capabilities
 
 ### Supported Conditions
@@ -340,11 +366,15 @@ GET    /api/v1/customers       - List customers
 - **Buy X Get Y** - Complex promotional offers
 - **Tiered Discounts** - Volume-based pricing
 
+---
+
 ## Performance Optimizations
 
 - **Database Indexing** - Optimized queries for rule evaluation
 - **Microservice Communication** - Efficient HTTP API calls
 - **Frontend Optimization** - Code splitting and lazy loading
+
+---
 
 ## Future Enhancements
 
@@ -355,6 +385,8 @@ GET    /api/v1/customers       - List customers
 - [ ] Mobile app integration
 - [ ] Multi-currency support
 - [ ] Advanced reporting dashboard
+
+---
 
 ## Testing
 
