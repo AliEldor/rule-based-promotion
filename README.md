@@ -367,6 +367,15 @@ php artisan test
 # Frontend tests
 cd frontend
 npm run test
+```
+
+### Unit Tests
+
+<div align="center">
+  <img src="./readme/tests.PNG" width="800" height="500">
+  <br>
+  <em>Comprehensive unit test coverage for Laravel backend</em>
+</div>
 
 ---
 
@@ -375,4 +384,4 @@ npm run test
   <br>
   <em>Modern microservices architecture for scalable e-commerce promotions</em>
 </div>
-```
+
